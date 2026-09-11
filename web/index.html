@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cluster_des — Modelación y Simulación</title>
+  <title>cluster_des — Modelos y Simulación</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -14,11 +14,11 @@
   <div class="app">
     <header class="titlebar">
       <div class="traffic" aria-hidden="true"><i class="r"></i><i class="y"></i><i class="g"></i></div>
-      <div class="title"><b>cluster_des</b> — UPC · Modelación y Simulación · Examen final</div>
+      <div class="title"><b>cluster_des</b> — UPC · Modelos y Simulación · Examen final</div>
       <div class="pills">
-        <span class="pill">Josheph Martinez</span>
+        <span class="pill">Josheph Martínez</span>
         <span class="pill">Oscar Duque</span>
-        <span class="pill">Python 3 + SimPy</span>
+        <span class="pill">Python 3.12 + SimPy</span>
       </div>
     </header>
 
@@ -60,40 +60,40 @@
             <div class="kicker">parcial / README.md <span class="speaker">Josheph · apertura</span></div>
             <h1>Clúster de servidores: gestión de mantenimiento</h1>
             <p class="lead">
-              Documento de sustentación (Unidades 1 y 2). Caso de <b>mantenimiento</b> en un clúster de
-              misión crítica: el hardware se desgasta de forma estocástica y un SLA del 99.9% penaliza
-              toda parada no planificada. Hay que elegir entre política <b>correctiva (run-to-failure)</b>
-              y <b>preventiva (programada)</b>.
+              Caracterización, modelado y DES de un clúster redundante <b>N+k</b> (Unidades 1 y 2).
+              Hay que elegir entre política <b>correctiva</b> (reparación tras la falla) y
+              <b>preventiva</b> (intervenciones programadas). El dilema es costo de intervención
+              frente a pérdidas por indisponibilidad no planeada: no se resuelve con un promedio estático.
             </p>
             <div class="flow">
-              <article class="card"><div class="badge">problema</div><h3>Desgaste y SLA</h3><p>Fallas imprevistas por desgaste mecánico y térmico. Indisponibilidad no planificada y multa financiera.</p></article>
+              <article class="card"><div class="badge">problema</div><h3>Estrategia y SLA</h3><p>Correctiva vs preventiva. Costos de taller acoplados a multas por paradas no planeadas.</p></article>
               <div class="arrow">→</div>
-              <article class="card"><div class="badge">estados</div><h3>O · F · M</h3><p>Tres <b>estados discretos</b> por servidor. El servicio vive si al menos N nodos están Operativos.</p></article>
+              <article class="card"><div class="badge">modelo</div><h3>CTMC + Weibull</h3><p>Hardware estocástico. Tres estados discretos por servidor. Unidad 1: taxonomía, fronteras y estados.</p></article>
               <div class="arrow">→</div>
-              <article class="card"><div class="badge">objetivo</div><h3>Simular 8 760 h</h3><p>Estimar A(t) bajo ambas políticas y decidir con números, no con ensayo en producción.</p></article>
+              <article class="card"><div class="badge">objetivo</div><h3>Decidir sin arriesgar</h3><p>Python/SimPy y Monte Carlo: disponibilidad global y riesgo, sin tocar el entorno real.</p></article>
             </div>
             <div class="grid-3">
               <article class="card">
-                <div class="badge">7 ejes · Unidad 1</div>
+                <div class="badge">Unidad 1</div>
                 <h3>Clasificación del sistema</h3>
-                <p>Caja gris, concentrado, discreto, estocástico, dinámico, causal, no lineal y variante en el tiempo (LTV).</p>
+                <p>Siete ejes: caja gris, concentrado, discreto, estocástico, dinámico, causal, no lineal y LTV.</p>
               </article>
               <article class="card">
                 <div class="badge">trade-off</div>
                 <h3>Correctiva vs preventiva</h3>
-                <p>Parada no planificada y cara, o parada planificada y predecible. Las dos comparten el taller.</p>
+                <p>Intervención reactiva o paradas periódicas. Ambas compiten por técnicos y repuestos.</p>
               </article>
               <article class="card">
                 <div class="badge">Unidad 2</div>
-                <h3>DES · Python · SimPy</h3>
-                <p>1 000 réplicas Monte Carlo, σ_A &lt; 0.001. What-if sin tumbar el datacenter.</p>
+                <h3>DES · Python 3.12 · SimPy</h3>
+                <p>1 000 réplicas Monte Carlo, σ_A &lt; 0.001. GIGO e independencia como riesgos del modelo.</p>
               </article>
             </div>
             <div class="code" data-code>
               <div class="gutter"></div>
-              <pre><span class="cm"># objetivo técnico (Contexto, §1.4)</span>
+              <pre><span class="cm"># objetivo (informe · conceptualización)</span>
 <span class="kw">def</span> <span class="fn">objetivo</span>():
-    <span class="kw">return</span> <span class="st">"estimar A(t) en 8760 h y elegir política bajo SLA 99.9%"</span></pre>
+    <span class="kw">return</span> <span class="st">"estimar disponibilidad global y costo vs riesgo bajo SLA 99.9%"</span></pre>
             </div>
             <h2 class="sub">Glosario</h2>
             <p class="lead">Términos que se usan en el resto de pestañas. No recitarlo entero: sirve de ancla visual.</p>
@@ -111,9 +111,9 @@
                 <tr><td>Weibull (β&gt;1)</td><td>Distribución de falla con envejecimiento: la tasa crece con la edad del hardware.</td></tr>
                 <tr><td>Caja gris</td><td>Se conoce la topología y las colas; el fallo interno entra como probabilidad, no como EDO.</td></tr>
                 <tr><td>Parámetros concentrados</td><td>El servidor es un punto: las variables dependen de t, no de (x, y, z) en el rack.</td></tr>
-                <tr><td>Estado / memoria</td><td>x1 estado {O,F,M}, x2 horas acumuladas, x3 cola del taller.</td></tr>
-                <tr><td>LTV / no lineal</td><td>λ(t) crece con la edad; el taller se satura (bloqueo de recursos).</td></tr>
-                <tr><td>GIGO</td><td>Si el MTTR de manual es 4 h y en campo son 12 h, la salida es basura.</td></tr>
+                <tr><td>Estado / memoria</td><td>S_i(t) ∈ {O,F,M} y cola Q(t) del taller (informe, criterio 7).</td></tr>
+                <tr><td>A_obs / SLA</td><td>A_obs se lee en logs. El KPI controlado es cumplir el SLA ≥ 99.9%.</td></tr>
+                <tr><td>GIGO</td><td>λ y μ de catálogo sin calibrar en campo: salida optimista y engañosa.</td></tr>
                 <tr><td>Monte Carlo</td><td>Varias réplicas independientes para estimar medias y σ_A.</td></tr>
                 <tr><td>SimPy</td><td>Motor Python de DES: procesos, recursos (técnicos) y prioridades.</td></tr>
               </table>
@@ -123,65 +123,59 @@
           <section class="section" data-id="01">
             <div class="kicker">01_concepto.py <span class="speaker">Oscar</span></div>
             <h1>1. Conceptualización y objetivo</h1>
-            <p class="lead">Los centros de datos sostienen servicios críticos bajo SLA. El hardware se desgasta de forma <b>estocástica</b> (mecánica y térmica). El problema de ingeniería es el <b>trade-off</b> entre dos políticas, no “si un servidor falla”.</p>
+            <p class="lead">Infraestructura de un clúster físico en un centro de datos empresarial, bajo un <b>SLA</b> riguroso. El núcleo no es “si un servidor falla”: es decidir entre política <b>correctiva pura</b> y <b>preventiva programada</b>.</p>
             <div class="states">
-              <div class="state o"><b>Estado O · Operativo</b><span>funciona en condiciones normales y sostiene la carga de producción</span></div>
-              <div class="state f"><b>Estado F · En Falla</b><span>avería catastrófica no planificada; espera o recibe reparación correctiva</span></div>
-              <div class="state m"><b>Estado M · En Mantenimiento</b><span>fuera de servicio de forma programada: limpieza, calibración o recambio</span></div>
+              <div class="state o"><b>Estado O · Operativo</b><span>funcionamiento normal</span></div>
+              <div class="state f"><b>Estado F · En Falla</b><span>falla no planeada por avería de hardware</span></div>
+              <div class="state m"><b>Estado M · En Mantenimiento</b><span>intervención técnica programada</span></div>
             </div>
-            <div class="table-wrap">
-              <table>
-                <tr><th>Criterio</th><th>Correctiva (run-to-failure)</th><th>Preventiva (programada)</th></tr>
-                <tr><td>Detonante</td><td>Ocurrencia intempestiva de la falla</td><td>Cumplimiento del intervalo ν</td></tr>
-                <tr><td>Impacto</td><td>Parada no planificada; alto riesgo de caída del SLA</td><td>Parada planificada en ventana de baja demanda</td></tr>
-                <tr><td>Costo por evento</td><td>Elevado: emergencia + penalización SLA</td><td>Moderado y predecible</td></tr>
-                <tr><td>Efecto en λ</td><td>No altera la tasa intrínseca de desgaste</td><td>Restablece en parte la confiabilidad</td></tr>
-                <tr><td>Taller</td><td>Demanda aleatoria y picos de congestión</td><td>Carga distribuida y más balanceada</td></tr>
-              </table>
+            <p class="lead">Ambas estrategias articulan procesos estocásticos acoplados:</p>
+            <div class="grid-2">
+              <article class="card"><h3>Desgaste y detección</h3><p>Tasa aleatoria de fallas por desgaste físico y detección de eventos de degradación.</p></article>
+              <article class="card"><h3>Recursos y agenda</h3><p>Personal técnico, repuestos y programación de paradas preventivas: recursos limitados.</p></article>
             </div>
-            <p class="lead">Objetivo técnico: reproducir el clúster durante <b>8 760 horas</b> y estimar la disponibilidad real A(t) bajo ambas políticas, como base cuantitativa de decisión.</p>
+            <p class="lead">Objetivo: reproducir la dinámica temporal en DES y estimar la <b>disponibilidad global</b>, midiendo costo operativo de intervención frente al riesgo financiero o reputacional de las indisponibilidades no planificadas.</p>
           </section>
 
           <section class="section" data-id="02">
             <div class="kicker">02_fronteras.py <span class="speaker">Josheph</span></div>
-            <h1>2. Volumen de control y entorno exógeno</h1>
-            <p class="lead">La frontera interna abarca solo lo que la gestión de mantenimiento del hardware puede manipular. El resto son <b>perturbaciones no manipulables</b>.</p>
+            <h1>2. Fronteras, límites y volumen de control</h1>
+            <p class="lead">El volumen de control se circunscribe a los <b>servidores físicos</b>, el <b>personal del taller</b> y las <b>reglas de programación</b> de mantenimiento sobre el hardware.</p>
             <div class="grid-2">
               <article class="card">
                 <div class="badge">frontera interna</div>
                 <h3>Volumen de control</h3>
                 <ul>
-                  <li>N servidores físicos del clúster</li>
-                  <li>Taller interno y personal técnico asignado</li>
-                  <li>Algoritmos de programación e intervención</li>
+                  <li>Servidores físicos de cómputo del clúster</li>
+                  <li>Personal técnico asignado al taller / soporte</li>
+                  <li>Reglas lógicas de programación de mantenimiento</li>
                 </ul>
               </article>
               <article class="card">
-                <div class="badge">fuera de la frontera</div>
-                <h3>Entorno exógeno</h3>
+                <div class="badge">excluidos de la frontera</div>
+                <h3>Perturbaciones exógenas</h3>
                 <ul>
-                  <li>Capa de software, SO y aplicaciones en contenedor</li>
-                  <li>Red de transporte externa</li>
-                  <li>Subestación eléctrica ascendente</li>
+                  <li>Software: SO, bases de datos y microservicios</li>
+                  <li>Red externa: WAN, enrutadores de borde e ISP</li>
+                  <li>Eléctrico y físico: subestación, UPS y refrigeración externa</li>
                 </ul>
               </article>
             </div>
-            <p class="lead">Influyen en el servicio global, pero no las controla el taller. Una causa común (aire acondicionado o sobretensión) queda fuera y el modelo asume fallas independientes.</p>
+            <p class="lead">Lo excluido se trata como perturbación. El foco es desgaste del hardware, políticas de mantenimiento y capacidad de reparación disponible.</p>
           </section>
 
           <section class="section" data-id="03">
             <div class="kicker">03_restricciones.py <span class="speaker">Oscar</span></div>
-            <h1>3. Condiciones de frontera</h1>
-            <p class="lead">La frontera dice <b>qué entra</b>. Estas filas son las <b>restricciones de borde</b> con las que el modelo conserva validez (valores de referencia del Contexto).</p>
+            <h1>3. Condiciones de frontera y restricciones</h1>
+            <p class="lead">Parámetros límite con los que el modelo <b>conserva validez técnica</b>. La columna de referencia es del Contexto / laboratorio; el informe define los símbolos.</p>
             <div class="table-wrap">
               <table>
-                <tr><th>Parámetro de borde</th><th>Símbolo</th><th>Significado físico</th><th>Referencia</th></tr>
-                <tr><td>Tamaño del clúster</td><td>N</td><td>Nodos de cómputo instalados</td><td>10, 50 o 100</td></tr>
-                <tr><td>Redundancia activa</td><td>N+k</td><td>Tolerancia a fallas simultáneas</td><td>k = 1 o 2</td></tr>
-                <tr><td>Tasa de falla intrínseca</td><td>λ(t) = 1/MTBF</td><td>Frecuencia de averías; puede crecer con la edad</td><td>MTBF 2 000–5 000 h</td></tr>
-                <tr><td>Tasa de reparación</td><td>μ = 1/MTTR</td><td>Velocidad del taller</td><td>MTTR 4–12 h</td></tr>
-                <tr><td>Intervalo preventivo</td><td>ν</td><td>Frecuencia de paradas programadas</td><td>cada 720 h (mensual)</td></tr>
-                <tr><td>Límite de desempeño</td><td>A_SLA</td><td>Disponibilidad mínima de contrato</td><td>99.9% (tres nueves)</td></tr>
+                <tr><th>Parámetro / restricción</th><th>Símbolo / definición</th><th>Significado e impacto físico</th><th>Referencia</th></tr>
+                <tr><td>Servidores y redundancia</td><td>N total, k redundantes (N+k)</td><td>Tolerancia a fallas simultáneas antes de degradar o interrumpir el servicio</td><td>N = 10, 50 o 100 · k = 1 o 2</td></tr>
+                <tr><td>Tasa de falla del hardware</td><td>λ = 1 / MTBF</td><td>Inverso del tiempo medio entre fallas. Frecuencia estocástica de averías</td><td>MTBF 2 000–5 000 h</td></tr>
+                <tr><td>Tasa de reparación técnica</td><td>μ = 1 / MTTR</td><td>Inverso del tiempo medio de reparación. Lo gobiernan técnicos y repuestos</td><td>MTTR 4–12 h</td></tr>
+                <tr><td>Periodicidad preventiva</td><td>ν = 1 / T_prev</td><td>Frecuencia programada de intervenciones antes de la falla física</td><td>cada 720 h (mensual)</td></tr>
+                <tr><td>Restricción de desempeño</td><td>SLA mínimo</td><td>Nivel mínimo aceptable de disponibilidad; criterio de éxito del sistema</td><td>99.9% (tres nueves)</td></tr>
               </table>
             </div>
           </section>
@@ -189,7 +183,7 @@
           <section class="section" data-id="04">
             <div class="kicker">04_taxonomia.py <span class="speaker">Josheph</span></div>
             <h1>4. Taxonomía sistémica — 7 ejes (Unidad 1)</h1>
-            <p class="lead">Clasificación del Contexto. Si se puede <b>contar</b> (1 falla, 2 técnicos, 3 en cola), el sistema es discreto. Además es LTV: λ(t) crece al envejecer.</p>
+            <p class="lead">Clasificación del modelo. Si se puede <b>contar</b> (1 falla, 2 técnicos, 3 en cola), el sistema es discreto. Además es LTV: λ(t) crece al envejecer.</p>
             <div class="grid-3">
               <article class="card"><div class="badge">1 · caja</div><h3>Caja gris</h3><p>Se conoce topología, taller y causalidad de servicio. Las causas atómicas del fallo no son EDO: son Weibull/exponencial históricas.</p></article>
               <article class="card"><div class="badge">2 · espacio</div><h3>Parámetros concentrados</h3><p>Cada servidor es un nodo puntual {O, F, M}. Se ignoran gradientes térmicos dentro del rack (temperatura uniforme).</p></article>
@@ -203,63 +197,57 @@
 
           <section class="section" data-id="05">
             <div class="kicker">05_matematica.py <span class="speaker">Oscar</span></div>
-            <h1>5. Formulación matemática (CTMC + Weibull)</h1>
-            <p class="lead">Transiciones O, F, M con matriz de tasas Q. Unidades: λ, ν, μ, μ_p son 1/hora. A_ind cierra para un nodo; A_sistema usa N+k. La cola de técnicos rompe la independencia.</p>
+            <h1>5. Formulación matemática del modelo</h1>
+            <p class="lead">CTMC sobre S = {O, F, M}. λ = 1/MTBF. Exponencial si la falla es aleatoria; Weibull con β &gt; 1 si hay envejecimiento. μ = 1/MTTR. A_cluster agrega “al menos N en O” y el acoplamiento de la cola de reparación.</p>
             <div class="code" data-code>
               <div class="gutter"></div>
-              <pre><span class="cm"># matriz Q  filas/cols: O, F, M</span>
-<span class="cm">#        O              F      M</span>
-Q = [[ -(lam + nu),    lam,   nu ],
-     [  mu,           -mu,     0 ],
-     [  mu_p,           0, -mu_p ]]
-<span class="cm"># λ falla no planificada · ν preventiva · μ correctiva · μ_p servicio preventivo</span>
+              <pre><span class="cm"># tasas de intensidad (informe)</span>
+lam = <span class="nu">1</span> / MTBF
+mu  = <span class="nu">1</span> / MTTR
 
-<span class="cm"># Weibull β&gt;1 (envejecimiento). La exponencial tiene memoria nula.</span>
-f(t)     = (beta / eta) * (t / eta) ** (beta - <span class="nu">1</span>) * exp(-(t / eta) ** beta)
-lambda_t = (beta / eta) * (t / eta) ** (beta - <span class="nu">1</span>)
+<span class="cm"># exponencial: falla aleatoria, memoria nula</span>
+f_exp(t) = lam * exp(-lam * t)
 
-A_ind     = MTBF / (MTBF + MTTR)   <span class="cm"># = μ / (λ + μ)</span>
-A_sistema = suma i=N..N+k  C(N+k, i) * A_ind**i * (1-A_ind)**(N+k-i)</pre>
+<span class="cm"># Weibull β&gt;1: envejecimiento progresivo</span>
+f_w(t) = (beta / eta) * (t / eta) ** (beta - <span class="nu">1</span>) * exp(-(t / eta) ** beta)
+
+A_individual = MTBF / (MTBF + MTTR)
+<span class="cm"># A_cluster: P(al menos N en O), con acoplamiento en la cola del taller</span></pre>
             </div>
           </section>
 
           <section class="section" data-id="06">
             <div class="kicker">06_complejidad.py <span class="speaker">Josheph</span></div>
-            <h1>6. Variabilidad, interdependencia y acoplamiento</h1>
-            <p class="lead">Los promedios de Excel esconden la varianza σ². El taller compartido arma un <b>bucle de realimentación positiva</b>.</p>
+            <h1>6. Complejidad: variabilidad e interdependencia</h1>
+            <p class="lead">La complejidad sale de la interacción simultánea entre <b>variabilidad</b> e <b>interdependencia</b>.</p>
             <div class="grid-3">
               <article class="card">
                 <h3>Variabilidad estocástica</h3>
-                <p>Tiempos entre fallas y de reparación aleatorios. Los promedios estáticos ocultan picos de congestión y colapsos de cola.</p>
+                <p>Tiempo entre fallas y duración de reparaciones aleatorios. Con más horas acumuladas, λ(t) crece: se rompe la variabilidad constante y aparecen ráfagas.</p>
               </article>
               <article class="card">
-                <h3>Bucle correctivo ↔ preventivo</h3>
-                <p>Una ráfaga de fallas absorbe al 100% a los técnicos. Se cancelan preventivos. El resto envejece más, disparan nuevas fallas y cae A.</p>
+                <h3>Acoplamiento por recursos</h3>
+                <p>Correctivo y preventivo compiten por los mismos técnicos y repuestos. Un pico de fallas posterga preventivos, sube la probabilidad de fallas nuevas y arma un bucle de degradación.</p>
               </article>
               <article class="card">
-                <h3>Degradación N+k</h3>
-                <p>Una falla no derriba el servicio, pero consume el margen k. Con fallas concurrentes el riesgo de romper el SLA crece de forma no lineal.</p>
+                <h3>Redundancia (efecto dominó)</h3>
+                <p>Una falla no corta el servicio si hay N+k, pero el margen pasa a N+k−1. El riesgo ante fallas concurrentes crece de forma no lineal: por eso DES, no un estático.</p>
               </article>
             </div>
           </section>
 
           <section class="section" data-id="07">
             <div class="kicker">07_variables.py <span class="speaker">Oscar</span></div>
-            <h1>7. Matriz de variables (memoria y perturbaciones)</h1>
-            <p class="lead">Unidad 1: lo que hay que saber <b>ahora</b> para predecir el <b>después</b> son los estados x1, x2 y x3. No se mezclan con u, d ni y.</p>
+            <h1>7. Clasificación exhaustiva de variables</h1>
+            <p class="lead">Matriz del informe (criterio 7 de la rúbrica). Memoria del sistema: <b>S_i(t)</b> y <b>Q(t)</b>.</p>
             <div class="table-wrap">
               <table>
-                <tr><th>Clasificación</th><th>Símbolo</th><th>Variable</th><th>Rol</th></tr>
-                <tr><td>Entrada manipulable</td><td>u1(t)</td><td>Estrategia de mantenimiento</td><td>Decisión: 0 correctivo, 1 preventivo</td></tr>
-                <tr><td>Entrada manipulable</td><td>u2(t)</td><td>Intervalo ν</td><td>Frecuencia de intervenciones preventivas</td></tr>
-                <tr><td>Perturbación</td><td>d1(t)</td><td>Ocurrencia aleatoria de falla</td><td>Evento estocástico por envejecimiento</td></tr>
-                <tr><td>Perturbación</td><td>d2(t)</td><td>Temperatura del data center</td><td>Acelera λ; no la controla el taller</td></tr>
-                <tr><td>Estado (memoria)</td><td>x1(t)</td><td>Estado del servidor</td><td>x_i(t) ∈ {O, F, M}</td></tr>
-                <tr><td>Estado (memoria)</td><td>x2(t)</td><td>Horas de operación acumuladas</td><td>Memoria de desgaste térmico</td></tr>
-                <tr><td>Estado (memoria)</td><td>x3(t)</td><td>Longitud de cola en taller</td><td>Servidores esperando técnico</td></tr>
-                <tr><td>Salida controlada</td><td>y_c(t)</td><td>Disponibilidad del clúster A</td><td>Proporción real de tiempo en servicio</td></tr>
-                <tr><td>Salida medida</td><td>y_m(t)</td><td>Downtime en logs</td><td>Lectura SCADA (puede tener retardo)</td></tr>
-                <tr><td>Parámetro</td><td>N, λ, μ</td><td>Tamaño y tasas</td><td>Constantes del hardware y del taller</td></tr>
+                <tr><th>Categoría sistémica</th><th>Variable / parámetro</th><th>Rol en el modelo</th><th>Ejemplo en el clúster</th></tr>
+                <tr><td>Exógena / perturbación</td><td>Demanda / temp. ambiente</td><td>Estímulo externo fuera del control directo</td><td>Ráfagas de tráfico; fluctuaciones térmicas en el rack</td></tr>
+                <tr><td>Entrada manipulable</td><td>Política de mantenimiento</td><td>Decisión controlable por la gerencia</td><td>Frecuencia preventiva ν y asignación de técnicos</td></tr>
+                <tr><td>Estado (memoria)</td><td>S_i(t) y cola Q(t)</td><td>Conjunto mínimo que define la memoria operativa</td><td>{O, F, M} de cada servidor; servidores esperando técnico</td></tr>
+                <tr><td>Salida endógena</td><td>Disponibilidad observada A_obs</td><td>Respuesta medible en sensores / logs</td><td>Porcentaje de tiempo anual en estado Operativo</td></tr>
+                <tr><td>Salida controlada (KPI)</td><td>Cumplimiento de SLA</td><td>Variable real que se busca mantener en el setpoint</td><td>Nivel de servicio por encima del 99.9%</td></tr>
               </table>
             </div>
           </section>
@@ -268,9 +256,9 @@ A_sistema = suma i=N..N+k  C(N+k, i) * A_ind**i * (1-A_ind)**(N+k-i)</pre>
             <div class="lab-head">
               <div>
                 <div class="kicker">08_lab.py <span class="speaker">Josheph · demo</span></div>
-                <h1>8. Implementación DES (SimPy)</h1>
+                <h1>8. Implementación computacional</h1>
               </div>
-              <p class="lead">Python 3 + SimPy, NumPy/SciPy, horizonte 8 760 h, <b>1 000 réplicas</b> Monte Carlo (Contexto §7). Criterio σ_A &lt; 0.001. La corrida puede tardar un minuto.</p>
+              <p class="lead">Python 3.12 + SimPy, NumPy/SciPy, T_total = 8 760 h, <b>1 000 réplicas</b> por política. Convergencia σ_A &lt; 0.001 (0.1%). Los cinco escenarios son las figuras del informe.</p>
             </div>
             <div class="lab">
               <form class="card form" id="sim-form">
@@ -278,29 +266,29 @@ A_sistema = suma i=N..N+k  C(N+k, i) * A_ind**i * (1-A_ind)**(N+k-i)</pre>
                   <h3>Mantenimiento</h3>
                   <button type="button" class="scen active" data-scen="base">
                     <b>Operación estándar</b>
-                    <small>N=10, k=2, 2 técnicos, ν cada 720 h (mensual). Caso de referencia.</small>
+                    <small>N=10, req=8 (N+2), 2 técnicos, Weibull β=1.8, MTBF 2000 h, MTTR 8 h, ν=720 h.</small>
                   </button>
                   <button type="button" class="scen" data-scen="sobreprev">
                     <b>Agenda agresiva</b>
-                    <small>Paran cada 20 días. Suele recortar disponibilidad por exceso de paradas.</small>
+                    <small>Igual que el estándar, pero ν=480 h. Más preventivo del que el desgaste justifica.</small>
                   </button>
                 </div>
                 <div class="scen-group">
                   <h3>Hardware</h3>
                   <button type="button" class="scen" data-scen="viejo">
                     <b>Servidores envejecidos</b>
-                    <small>MTBF 700 h y Weibull β = 2.4: el desgaste dispara las fallas.</small>
+                    <small>MTBF 700 h, β=2.4, MTTR 10 h, ν=720 h. λ(t) crece con el uso.</small>
                   </button>
                 </div>
                 <div class="scen-group">
                   <h3>Taller</h3>
                   <button type="button" class="scen" data-scen="saturado">
                     <b>Un solo técnico</b>
-                    <small>Cola compartida y MTTR 16 h. El recurso es el cuello de botella.</small>
+                    <small>1 técnico, MTBF 1200 h, MTTR 16 h, ν=1080 h. El taller limita más que la política.</small>
                   </button>
                   <button type="button" class="scen" data-scen="lento">
                     <b>Reparación lenta</b>
-                    <small>Poca redundancia y 36 h de MTTR. El SLA se cae fácil.</small>
+                    <small>N=8, N+1, MTBF 1500 h, MTTR 36 h, ν=1440 h. k=1 y reparación larga.</small>
                   </button>
                 </div>
                 <div class="params">
@@ -348,63 +336,62 @@ A_sistema = suma i=N..N+k  C(N+k, i) * A_ind**i * (1-A_ind)**(N+k-i)</pre>
 
           <section class="section" data-id="09">
             <div class="kicker">09_riesgos.py <span class="speaker">Oscar</span></div>
-            <h1>9. Justificación, costo-beneficio y GIGO (Unidad 2)</h1>
-            <p class="lead">Ensayar políticas en un clúster de producción es financieramente destructivo: paradas arbitrarias violan el SLA. La DES es el entorno seguro para el what-if.</p>
+            <h1>9. Justificación de la simulación y riesgos</h1>
+            <p class="lead">Unidad 2: utilidad y problemáticas. Evaluar políticas en virtual evita cortes catastróficos en el clúster de producción.</p>
             <div class="grid-2">
               <article class="card">
-                <h3>Por qué no experimentar en vivo</h3>
-                <p>Exponer la infraestructura real a paradas de prueba genera penalizaciones masivas. La simulación comprime 8 760 h sin cortar servicio.</p>
-              </article>
-              <article class="card">
-                <h3>Binomio costo-beneficio (OPEX)</h3>
-                <p>Punto óptimo entre contratar técnicos y comprar repuestos preventivos frente al riesgo financiero de la indisponibilidad no planificada.</p>
+                <h3>Toma de decisiones</h3>
+                <p>What-if sin arriesgar el entorno real. Punto de equilibrio entre gasto preventivo (OPEX/CAPEX) y penalización por incumplir el SLA.</p>
               </article>
               <article class="card">
                 <h3>Síndrome GIGO</h3>
-                <p>El manual dice MTTR = 4 h exactas. En campo, pernos trabados o falta de repuestos lo estiran a 12 h. Promedios de ficha = basura de salida.</p>
+                <p>La validez depende de λ y μ. Parámetros de catálogo sin calibración de campo producen un engaño estadístico optimista.</p>
               </article>
               <article class="card">
-                <h3>Independencia (límite del modelo)</h3>
-                <p>Se asumen fallas independientes. Causa común exógena (colapso del aire acondicionado o sobretensión) tumba varios nodos a la vez y el modelo no lo ve.</p>
+                <h3>Independencia de fallas</h3>
+                <p>El modelo asume fallas independientes. Una causa común (falla del chiller de refrigeración) tumba varios nodos a la vez y aquí no entra.</p>
+              </article>
+              <article class="card">
+                <h3>Límite metodológico</h3>
+                <p>Dos riesgos del informe: basura de entrada (GIGO) y el supuesto de independencia. Ambos acotan lo que SimPy puede afirmar.</p>
               </article>
             </div>
           </section>
 
           <section class="section" data-id="10">
             <div class="kicker">10_aplicacion.py <span class="speaker">Josheph</span></div>
-            <h1>10. Decisión en infraestructura real</h1>
-            <p class="lead">El modelo responde preguntas de un data center de misión crítica: qué política operar, con qué taller y con qué k, sin ensayo destructivo en producción.</p>
+            <h1>10. Aplicación al contexto tecnológico real</h1>
+            <p class="lead">Herramienta cuantitativa para centros de datos regionales y corporativos. Tres preguntas gerenciales del informe:</p>
             <div class="grid-3">
-              <article class="card"><h3>¿Cuántos técnicos?</h3><p>u2 y el recurso del taller. En el lab se mira x3 (cola) y y_c (disponibilidad).</p></article>
-              <article class="card"><h3>¿Cada 720 h o no?</h3><p>ν mensual es la referencia. Más frecuente puede recortar A por exceso de estado M.</p></article>
-              <article class="card"><h3>¿k = 1 o k = 2?</h3><p>N+k define la tolerancia. El riesgo de romper el SLA no es lineal cuando se consume el margen.</p></article>
+              <article class="card"><h3>¿Cuántos técnicos por turno?</h3><p>La asignación de personal es entrada manipulable. En el lab se ve en la cola Q(t) y en A_obs.</p></article>
+              <article class="card"><h3>¿Cuándo deja de ser rentable prevenir?</h3><p>A partir de qué intervalo la preventiva pierde más disponibilidad de la que evita en fallas.</p></article>
+              <article class="card"><h3>¿Qué redundancia garantiza 99.9%?</h3><p>Qué nivel N+k sostiene el SLA con presupuestos acotados, sin ensayo en producción.</p></article>
             </div>
           </section>
 
           <section class="section" data-id="11">
             <div class="kicker">11_puntos_extra.py <span class="speaker">Oscar · cierre</span></div>
-            <h1>11. Punto extra: mapa de clasificación</h1>
-            <p class="lead">Cuadro del Contexto (+0.5). Este clúster: discreto, caja gris, concentrado, estocástico, dinámico, causal, no lineal y LTV.</p>
+            <h1>11. Punto extra: clasificación y mapa mental</h1>
+            <p class="lead">+0,5 del examen. Ventaja, desventaja y ejemplo por eje. Este clúster: discreto, caja gris, concentrado, estocástico, dinámico, causal, no lineal y LTV.</p>
             <div class="table-wrap">
               <table>
-                <tr><th>Clasificación</th><th>Ventaja</th><th>Desventaja</th><th>Ejemplo</th></tr>
-                <tr><td>Discreto vs continuo</td><td>Discreto simplifica eventos; continuo refleja el flujo físico</td><td>Continuo exige EDO; discreto ignora lo que pasa entre saltos</td><td>ATM / servidores vs carga de un capacitor</td></tr>
-                <tr><td>Caja blanca vs negra (y gris)</td><td>Blanca explica la física; negra no la necesita</td><td>Blanca es cara de derivar; negra no predice fuera de los datos</td><td>Ohm / Bernoulli · red de tráfico · <b>este clúster (gris)</b></td></tr>
-                <tr><td>Concentrado vs distribuido</td><td>Concentrado reduce a un nodo puntual</td><td>Distribuido pide EDP y gradientes espaciales</td><td>Masa-resorte vs calor en una barra</td></tr>
-                <tr><td>Determinista vs estocástico</td><td>Determinista: una respuesta exacta</td><td>Estocástico: miles de réplicas Monte Carlo</td><td>Órbita / reloj vs fallas de servidor</td></tr>
-                <tr><td>Estático vs dinámico</td><td>Estático: y = Kx, instantáneo</td><td>Dinámico: memoria y transitorios</td><td>Balanza vs horno / clúster</td></tr>
-                <tr><td>Causal vs no causal</td><td>Causal realizable en tiempo real</td><td>No causal necesita el futuro</td><td>Piloto automático vs post-proceso caja negra</td></tr>
-                <tr><td>Lineal vs no lineal</td><td>Superposición (aditividad y homogeneidad)</td><td>Sin solución analítica general en cerrado</td><td>V = I·R vs F = c·v²</td></tr>
+                <tr><th>Criterio taxonómico</th><th>Ventaja metodológica</th><th>Desventaja / limitación</th><th>Ejemplo práctico</th></tr>
+                <tr><td>Lineal vs no lineal</td><td>Principio de superposición en LTI</td><td>Ignora saturación, fricción y no linealidades reales</td><td>Resistor ideal vs arrastre F = c·v²</td></tr>
+                <tr><td>Continuo vs discreto</td><td>Continuo: cálculo diferencial. Discreto: control digital</td><td>El discreto pide análisis de muestreo y cuantización</td><td>Temperatura de motor vs transacciones bancarias</td></tr>
+                <tr><td>Causal vs no causal</td><td>Los causales son realizables en tiempo real</td><td>Los no causales solo sirven en post-proceso</td><td>Piloto automático vs filtrado de una foto guardada</td></tr>
+                <tr><td>Estático vs dinámico</td><td>Los estáticos son simples (sin memoria ni retardo)</td><td>No modelan transitorios ni almacenamiento de energía</td><td>Balanza analógica vs horno con inercia térmica</td></tr>
+                <tr><td>Determinístico vs estocástico</td><td>Respuestas analíticas exactas</td><td>Ignoran ruido, variabilidad y riesgo real</td><td>Préstamo a tasa fija vs fallas de sensores</td></tr>
+                <tr><td>Caja blanca, gris y negra</td><td>Ajusta el detalle a la física conocida o a los datos</td><td>Blanca es compleja; negra no explica la física</td><td>Circuito RC · <b>clúster con Weibull (gris)</b> · red neuronal</td></tr>
               </table>
             </div>
             <div class="mind">
               <div class="h">NODO CENTRAL · taxonomía de sistemas en ingeniería</div>
-              <div><span class="b">1 temporal</span>     discreto (eventos) <span class="g">vs</span> continuo (EDO)</div>
-              <div><span class="b">2 información</span>  blanca <span class="g">| gris ← este modelo |</span> negra</div>
-              <div><span class="b">3 espacio</span>      concentrado (punto) <span class="g">vs</span> distribuido (EDP)</div>
-              <div><span class="b">4 incertidumbre</span> determinístico <span class="g">vs</span> estocástico (Weibull)</div>
-              <div><span class="b">5 memoria</span>      estático <span class="g">vs</span> dinámico (este clúster)</div>
-              <div><span class="b">6 causa / forma</span> causal · no lineal · LTV (λ(t) crece)</div>
+              <div><span class="b">1 forma</span>         lineal (superposición) <span class="g">vs</span> no lineal (F=c·v²)</div>
+              <div><span class="b">2 temporal</span>      continuo (EDO) <span class="g">vs</span> discreto (eventos)</div>
+              <div><span class="b">3 causa</span>         causal (tiempo real) <span class="g">vs</span> no causal (posthoc)</div>
+              <div><span class="b">4 memoria</span>       estático <span class="g">vs</span> dinámico (horno / clúster)</div>
+              <div><span class="b">5 incertidumbre</span> determinístico <span class="g">vs</span> estocástico</div>
+              <div><span class="b">6 información</span>   blanca | <span class="g">gris ← este modelo</span> | negra</div>
             </div>
           </section>
 
