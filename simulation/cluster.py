@@ -50,7 +50,7 @@ class ClusterParams:
     beta: float = 1.8
     eta: float | None = None
     horizon: float = 8760.0
-    replications: int = 40
+    replications: int = 1000
     seed: int = 42
     cost_corrective: float = 450.0
     cost_preventive: float = 120.0

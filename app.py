@@ -24,7 +24,7 @@ class SimRequest(BaseModel):
     mttr: float = Field(8, gt=0.1, le=500)
     t_prev: float = Field(720, gt=1, le=8760)
     beta: float = Field(1.8, gt=0.5, le=6)
-    replications: int = Field(40, ge=1, le=200)
+    replications: int = Field(1000, ge=1, le=1000)
     use_weibull: bool = True
 
 

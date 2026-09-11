@@ -270,7 +270,7 @@ A_sistema = suma i=N..N+k  C(N+k, i) * A_ind**i * (1-A_ind)**(N+k-i)</pre>
                 <div class="kicker">08_lab.py <span class="speaker">Josheph · demo</span></div>
                 <h1>8. Implementación DES (SimPy)</h1>
               </div>
-              <p class="lead">Python 3 + SimPy, NumPy/SciPy, horizonte 8 760 h. El informe usa 1 000 réplicas; aquí 24 para el video. σ_A &lt; 0.001.</p>
+              <p class="lead">Python 3 + SimPy, NumPy/SciPy, horizonte 8 760 h, <b>1 000 réplicas</b> Monte Carlo (Contexto §7). Criterio σ_A &lt; 0.001. La corrida puede tardar un minuto.</p>
             </div>
             <div class="lab">
               <form class="card form" id="sim-form">
@@ -307,7 +307,7 @@ A_sistema = suma i=N..N+k  C(N+k, i) * A_ind**i * (1-A_ind)**(N+k-i)</pre>
                   <div><label>N total</label><input name="n_total" type="number" value="10" min="2" max="40" /></div>
                   <div><label>N req.</label><input name="n_required" type="number" value="8" min="1" max="40" /></div>
                   <div><label>Técnicos</label><input name="n_technicians" type="number" value="2" min="1" max="20" /></div>
-                  <div><label>Réplicas</label><input name="replications" type="number" value="24" min="1" max="200" /></div>
+                  <div><label>Réplicas</label><input name="replications" type="number" value="1000" min="1" max="1000" /></div>
                   <div><label>MTBF</label><input name="mtbf" type="number" value="2000" min="10" /></div>
                   <div><label>MTTR</label><input name="mttr" type="number" value="8" min="0.5" step="0.5" /></div>
                   <div><label>T_prev</label><input name="t_prev" type="number" value="720" min="24" /></div>
@@ -318,7 +318,7 @@ A_sistema = suma i=N..N+k  C(N+k, i) * A_ind**i * (1-A_ind)**(N+k-i)</pre>
                   <option value="0">Exponencial (memoria nula)</option>
                 </select>
                 <button class="btn" id="run" type="submit">▶  comparar políticas</button>
-                <p class="hint" id="sim-status">24 réplicas · elige y corre</p>
+                <p class="hint" id="sim-status">1 000 réplicas Monte Carlo · elige escenario y corre</p>
               </form>
               <div class="lab-results">
                 <div class="kpis">

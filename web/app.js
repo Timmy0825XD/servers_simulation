@@ -87,23 +87,23 @@ numberCodeBlocks();
 const SCENARIOS = {
   base: {
     n_total: 10, n_required: 8, n_technicians: 2, mtbf: 2000, mttr: 8,
-    t_prev: 720, beta: 1.8, replications: 24, use_weibull: "1",
+    t_prev: 720, beta: 1.8, replications: 1000, use_weibull: "1",
   },
   sobreprev: {
     n_total: 10, n_required: 8, n_technicians: 2, mtbf: 2000, mttr: 8,
-    t_prev: 480, beta: 1.8, replications: 24, use_weibull: "1",
+    t_prev: 480, beta: 1.8, replications: 1000, use_weibull: "1",
   },
   viejo: {
     n_total: 10, n_required: 8, n_technicians: 2, mtbf: 700, mttr: 10,
-    t_prev: 720, beta: 2.4, replications: 24, use_weibull: "1",
+    t_prev: 720, beta: 2.4, replications: 1000, use_weibull: "1",
   },
   saturado: {
     n_total: 10, n_required: 8, n_technicians: 1, mtbf: 1200, mttr: 16,
-    t_prev: 1080, beta: 1.8, replications: 24, use_weibull: "1",
+    t_prev: 1080, beta: 1.8, replications: 1000, use_weibull: "1",
   },
   lento: {
     n_total: 8, n_required: 7, n_technicians: 2, mtbf: 1500, mttr: 36,
-    t_prev: 1440, beta: 1.6, replications: 24, use_weibull: "1",
+    t_prev: 1440, beta: 1.6, replications: 1000, use_weibull: "1",
   },
 };
 
